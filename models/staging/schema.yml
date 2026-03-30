@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: "Modèle de staging nettoyant les données brutes des clients."
+    columns:
+      - name: customer_id
+        description: "Clé primaire unique pour chaque client."
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_orders
+    description: "Modèle de staging pour les commandes."
+    columns:
+      - name: order_id
+        description: "Clé primaire de la commande."
+        tests:
+          - unique
+          - not_null
+      - name: status
+        description: "Statut de la commande."
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
